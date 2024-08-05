@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Captioning using LLaVA Multimodal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function copyToClipboard() {
+            const captionText = document.getElementById('caption-text');
+            const textArea = document.createElement('textarea');
+            textArea.value = captionText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Caption copied to clipboard');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Caption:</h1>
+        <img src="data:image/jpeg;base64,{{ image_data }}" alt="Uploaded Image" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+        <p id="caption-text">{{ caption }}</p>
+        <button class="button" onclick="copyToClipboard()">Copy Caption</button>
+        <a href="/" class="button">Upload Another Image</a>
+    </div>
+</body>
+</html>

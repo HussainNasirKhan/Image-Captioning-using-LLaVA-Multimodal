@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Captioning using LLaVA Multimodal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById('image');
+            const fileNameDisplay = document.getElementById('file-name');
+            fileInput.addEventListener('change', function() {
+                fileNameDisplay.textContent = this.files[0].name;
+            });
+        }
+
+        function showLoader() {
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('upload-form').style.display = 'none';
+        }
+    </script>
+</head>
+<body onload="displayFileName()">
+    <div class="container">
+        <h1>Image Captioning using LLaVA</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <div id="loader" class="loader" style="display: none;"></div>
+        <form id="upload-form" method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+            <input type="file" name="image" id="image" class="inputfile">
+            <label for="image">Choose an image</label>
+            <span id="file-name"></span>
+            <input type="submit" value="Upload" class="button">
+        </form>
+    </div>
+</body>
+</html>
